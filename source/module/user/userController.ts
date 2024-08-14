@@ -37,4 +37,17 @@ const loginUser = async (request: Request, response: Response) => {
   }
 };
 
-export default { loginUser, registerUser };
+const approveRequest = async (request: Request, response: Response) => {
+  try {
+    const data: any = await userService.approveRequest(request);
+    if (!data) {
+      throw new appError(status.CONFLICT, "unable to approve request");
+    }
+
+    createResponse(response, status.OK, "request successfilly accepted", data);
+  } catch (error: any) {
+    createResponse(response, error.status, error.message);
+  }
+};
+
+export default { loginUser, registerUser, approveRequest };

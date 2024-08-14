@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
-import Appointment from "./../../models/appointment";
-import Service from "./../../models/service";
+import Appointment from "../../models/product";
+import Service from "../../models/cart";
 import appError from "../../utils/helpers/appError";
 import status from "../../utils/helpers/status.json";
 import User from "../../models/user";

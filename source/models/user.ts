@@ -1,12 +1,18 @@
 import { Model, DataTypes, ForeignKey } from "sequelize";
 import sequelize from "../utils/config/database";
 import Role from "./role";
+import Category from "./category";
 
 class User extends Model {
   public id!: number;
-  public name!: string;
+  public firstName!: string;
+  public lastName!: string;
   public email!: string;
+  public profileImage!: string;
+  public mobile!: string;
   public password!: string;
+  public isApproved!: boolean;
+  public categoryId!: ForeignKey<Category["id"]>;
   public roleId!: ForeignKey<Role["id"]>;
 }
 
@@ -17,7 +23,20 @@ User.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
+    isApproved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    profileImage: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -30,6 +49,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    mobile: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize,
@@ -37,8 +60,7 @@ User.init(
     timestamps: false,
   }
 );
-
-// Define association
+User.belongsTo(Category, { foreignKey: "categoryId", as: "category" });
 User.belongsTo(Role, { foreignKey: "roleId", as: "role" });
 
 export default User;

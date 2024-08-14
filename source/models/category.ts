@@ -1,16 +1,12 @@
-// src/models/Service.ts
-
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../utils/config/database";
 
-class Service extends Model {
+class Category extends Model {
   public id!: number;
   public name!: string;
-  public description!: string;
-  public pdfAttachment?: string;
 }
 
-Service.init(
+Category.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -20,21 +16,14 @@ Service.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    pdfAttachment: {
-      type: DataTypes.STRING,
-      allowNull: true,
+      unique: true,
     },
   },
   {
     sequelize,
-    modelName: "Service",
+    modelName: "Category",
     timestamps: false,
   }
 );
 
-export default Service;
+export default Category;

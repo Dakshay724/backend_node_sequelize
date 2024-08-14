@@ -1,1 +1,6 @@
-export default function () {}
+export default {
+  ROLES: {
+    ADMIN: "Admin",
+    CUSTOMER: "Customer",
+  },
+};
